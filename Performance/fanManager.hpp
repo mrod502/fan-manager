@@ -1,24 +1,26 @@
 #pragma once
-
+#include "temperatureMonitor.hpp"
+#include <functional>
 namespace Performance {
-  class FanManager
+  class FanManager : public Performance::TemperatureMonitor
   {
 
     public:
-      FanManager(unsigned char base_speed, unsigned char max_speed, double threshold_temp, double max_temp);
+      FanManager(unsigned int, unsigned int, int, int);
 
-      void manage(unsigned char polling_interval);
+      void manage(unsigned char);
 
     protected:
-      unsigned char baseSpeed;
-      unsigned char maxSpeed;
-      unsigned char currentSpeed;
-      double thresholdTemp;
-      double maxTemp;
+      unsigned int baseSpeed;
+      unsigned int maxSpeed;
+      int thresholdTemp;
+      int maxTemp;
     
     private:
       void set_fan_speed(unsigned char);
-    
+      void handle_temperature_change(int);
+      unsigned int get_fan_speed(int);
+      static void set_pwm_intensity(int);
 
   };
 };
