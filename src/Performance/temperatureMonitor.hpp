@@ -7,9 +7,9 @@ namespace Performance {
   public:
     TemperatureMonitor();
     ~TemperatureMonitor();
-    double get_temperature();
-    void set_temperature_change_handler(std::function<void(int)>);
-    void monitor_temperature_file();
+    void set_change_handler(std::function<void(int)>);
+    void monitor_temperature();
+    int get_temperature();
     
   private:
     std::atomic<int> *temperature;
@@ -19,6 +19,5 @@ namespace Performance {
     unsigned int fan_baseline;
     unsigned int fan_max;
     static void default_callback(int);
-
   };
 };

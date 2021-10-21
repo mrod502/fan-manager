@@ -6,9 +6,9 @@
 int main(){
 
 //  Performance::FanManager *mgr = new Performance::FanManager(0,1<<7,110,180);
-  Performance::TemperatureMonitor *tm = new Performance::TemperatureMonitor();
+  Performance::FanManager *tm = new Performance::FanManager(0, 1024, 40, 70);
 
-  tm->monitor_temperature_file();
+  tm->manage();
 
   delete tm;
 

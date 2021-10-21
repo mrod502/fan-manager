@@ -8,7 +8,7 @@ namespace Performance {
     public:
       FanManager(unsigned int, unsigned int, int, int);
 
-      void manage(unsigned char);
+      void manage();
 
     protected:
       unsigned int baseSpeed;
@@ -17,7 +17,6 @@ namespace Performance {
       int maxTemp;
     
     private:
-      void set_fan_speed(unsigned char);
       void handle_temperature_change(int);
       unsigned int get_fan_speed(int);
       static void set_pwm_intensity(int);
