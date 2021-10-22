@@ -19,7 +19,5 @@ namespace Performance {
     private:
       void handle_temperature_change(int);
       unsigned int get_fan_speed(int);
-      static void set_pwm_intensity(int);
-
   };
 };

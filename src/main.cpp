@@ -2,22 +2,18 @@
 
 #include "Performance/fanManager.hpp"
 #include "Performance/temperatureMonitor.hpp"
+extern "C"{
 #include <wiringPi.h>
-
+}
 const int PWM_pin = 1;
 void setPWMWidth(int i){
   pwmWrite(PWM_pin, i);
 };
 
-
 int main(){
-
-//  Performance::FanManager *mgr = new Performance::FanManager(0,1<<7,110,180);
-  Performance::FanManager *fm = new Performance::FanManager(0, 1024, 40, 70);
-
+  wiringPiSetup();
+  Performance::FanManager *fm = new Performance::FanManager(0, 1024, 4000, 7000);
   fm->manage(setPWMWidth);
-
-  delete tm;
-
+  delete fm;
   return 0;
 };

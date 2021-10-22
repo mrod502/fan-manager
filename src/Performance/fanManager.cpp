@@ -10,12 +10,15 @@ const int PWM_pin = 1;
 namespace Performance {
   FanManager::FanManager(unsigned int base_speed, unsigned int max_speed, int threshold_temp, int max_temp){
     if (base_speed >1024){
+      std::cout <<"bruh base_speed\n";
       throw "base_speed must be in [0,1024]";
     };
     if (max_speed >1024){
+      std::cout <<"bruh max_speed\n";
       throw "max_speed must be in [0,1024]";
     };
-    if (maxTemp <= thresholdTemp){
+    if (max_temp <= threshold_temp){
+      std::cout <<"bruh eq\n";
       throw "maxTemp must be greater than threshold temp";
     };
 
@@ -31,10 +34,6 @@ namespace Performance {
       f(get_fan_speed(temp));
       sleep(1);
     };
-  };
-
-  void FanManager::handle_temperature_change(int t){
-    FanManager::set_pwm_intensity(get_fan_speed(t));
   };
 
   unsigned int FanManager::get_fan_speed(int t){
