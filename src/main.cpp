@@ -5,7 +5,7 @@
 #include <wiringPi.h>
 
 const int PWM_pin = 1;
-void setPWMWidth(int w){
+void setPWMWidth(int i){
   pwmWrite(PWM_pin, i);
 };
 
