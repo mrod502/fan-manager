@@ -3,7 +3,7 @@
 #include "fanManager.hpp"
 #include <functional>
 #include <algorithm>
-#include <wiringPi.h>
+
 
 const int PWM_pin = 1;
 
@@ -23,10 +23,14 @@ namespace Performance {
     maxSpeed = max_speed;
     thresholdTemp = threshold_temp;
     maxTemp = max_temp;
+  };
 
-    set_change_handler(std::bind(
-      FanManager::handle_temperature_change,this,std::placeholders::_1
-    ));
+  void FanManager::manage(std::function<void(int)> f){
+    while (true){
+      int temp = get_temperature();
+      f(get_fan_speed(temp));
+      sleep(1);
+    };
   };
 
   void FanManager::handle_temperature_change(int t){
@@ -41,7 +45,4 @@ namespace Performance {
     return baseSpeed + std::min<int>(std::max<int>(0, extraSpeed), speedRange);
   };
 
-  void FanManager::set_pwm_intensity(int i){
-    pwmWrite(PWM_pin, i);
-  };
 };

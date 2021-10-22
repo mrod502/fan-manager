@@ -8,7 +8,7 @@ namespace Performance {
     public:
       FanManager(unsigned int, unsigned int, int, int);
 
-      void manage();
+      void manage(std::function<void(int)>);
 
     protected:
       unsigned int baseSpeed;
