@@ -1,3 +1,4 @@
-SRC_FILES=`find . -iname "*.cpp"`
+SRC_FILES=$(find . -iname "*.cpp")
+WIRINGPI_FILES = $(find ./WiringPi -iname "*.c")
 
-g++ -lwiringPi -o fanmgr $SRC_FILES
+g++ --std=c++17 -o fanmgr $SRC_FILES $WIRINGPI_FILES

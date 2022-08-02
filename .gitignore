@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Editor config files
+.vscode
+
 # Compiled Object files
 *.slo
 *.lo
