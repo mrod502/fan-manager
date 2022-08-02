@@ -2,26 +2,33 @@
 #include <fstream>
 #include <unistd.h>
 #include <atomic>
-#include "./temperatureMonitor.hpp"
+#include "./Monitor.hpp"
 
-namespace Performance {
-  TemperatureMonitor::TemperatureMonitor(){
+namespace Temperature
+{
+  Monitor::Monitor()
+  {
     temperature = new std::atomic<int>(INT32_MIN);
-    callback = TemperatureMonitor::default_callback;
+    callback = Monitor::default_callback;
   };
 
-  TemperatureMonitor::~TemperatureMonitor(){
+  Monitor::~Monitor()
+  {
     delete temperature;
   };
 
-  void TemperatureMonitor::set_change_handler(std::function<void(int)> fn){
+  void Monitor::set_change_handler(std::function<void(int)> fn)
+  {
     callback = fn;
   };
 
-  void TemperatureMonitor::monitor_temperature(){
-    while (true) {
+  void Monitor::monitor_temperature()
+  {
+    while (true)
+    {
       int curTemp = get_temperature();
-      if (curTemp != temperature->load()){
+      if (curTemp != temperature->load())
+      {
         temperature->store(curTemp);
         callback(temperature->load());
       };
@@ -29,7 +36,8 @@ namespace Performance {
     };
   };
 
-  int TemperatureMonitor::get_temperature(){
+  int Monitor::get_temperature()
+  {
     std::ifstream temperatureFile;
     std::string line;
     temperatureFile.open("/sys/class/thermal/thermal_zone0/temp");
@@ -38,7 +46,8 @@ namespace Performance {
     return std::stoi(line);
   };
 
-  void TemperatureMonitor::default_callback(int v){
+  void Monitor::default_callback(int v)
+  {
     std::cout << "Temperature is " << v * 0.001 << " C\n";
   };
 };

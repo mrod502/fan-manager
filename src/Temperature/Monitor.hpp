@@ -1,16 +1,19 @@
 #pragma once
 #include <atomic>
 #include <functional>
-namespace Performance {
-  class TemperatureMonitor{
+
+namespace Temperature
+{
+  class Monitor
+  {
 
   public:
-    TemperatureMonitor();
-    ~TemperatureMonitor();
+    Monitor();
+    ~Monitor();
     void set_change_handler(std::function<void(int)>);
     void monitor_temperature();
     int get_temperature();
-    
+
   private:
     std::atomic<int> *temperature;
     std::function<void(int)> callback;
