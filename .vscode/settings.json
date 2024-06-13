@@ -47,5 +47,9 @@
     "streambuf": "cpp",
     "thread": "cpp",
     "typeinfo": "cpp"
-  }
+  },
+
+    "[cpp]":{
+      "editor.formatOnSave": true
+    }
 }
