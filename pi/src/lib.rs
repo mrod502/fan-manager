@@ -1,3 +1,5 @@
+pub mod gpio;
+pub mod stats;
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }

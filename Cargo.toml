@@ -1,3 +1,2 @@
 [workspace]
-members = [ "app","wiring"]
-
+members = ["app", "pi"]
